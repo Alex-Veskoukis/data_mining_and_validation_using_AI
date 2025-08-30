@@ -1,0 +1,137 @@
+banking_finance:
+  crossref_queries:
+    - '"decision tree" banking'
+    - '"decision tree" finance'
+  openalex_queries:
+    - '"decision tree" AND (banking OR finance)'
+  google_scholar_queries:
+    - '"decision tree" banking'
+    - '"decision tree" finance'
+  max_records: 1000
+
+healthcare_pharma:
+  crossref_queries:
+    - '"decision tree" "medical diagnosis"'
+    - '"decision tree" healthcare'
+  openalex_queries:
+    - '"decision tree" AND ("medical diagnosis" OR healthcare)'
+  google_scholar_queries:
+    - '"decision tree" "medical diagnosis"'
+    - '"decision tree" healthcare'
+  max_records: 1000
+
+insurance:
+  crossref_queries:
+    - '"decision tree" insurance'
+  openalex_queries:
+    - '"decision tree" AND insurance'
+  google_scholar_queries:
+    - '"decision tree" insurance'
+  max_records: 1000
+
+ecommerce_retail:
+  crossref_queries:
+    - '"decision tree" "e-commerce"'
+    - '"decision tree" retail'
+  openalex_queries:
+    - '"decision tree" AND ("e-commerce" OR retail)'
+  google_scholar_queries:
+    - '"decision tree" "e-commerce"'
+    - '"decision tree" retail'
+  max_records: 1000
+
+telecom_network_security:
+  crossref_queries:
+    - '"decision tree" telecom'
+    - '"decision tree" "network security"'
+  openalex_queries:
+    - '"decision tree" AND (telecom OR "network security")'
+  google_scholar_queries:
+    - '"decision tree" telecom'
+    - '"decision tree" "network security"'
+  max_records: 1000
+
+social_media:
+  crossref_queries:
+    - '"decision tree" "social media"'
+    - '"decision tree" "social media analytics"'
+  openalex_queries:
+    - '"decision tree" AND ("social media" OR "social media analytics")'
+  google_scholar_queries:
+    - '"decision tree" "social media"'
+    - '"decision tree" "social media analytics"'
+  max_records: 1000
+
+education_learning_analytics:
+  crossref_queries:
+    - '"decision tree" "learning analytics"'
+    - '"decision tree" "student data"'
+    - '"decision tree" "educational data"'
+  openalex_queries:
+    - '"decision tree" AND ("learning analytics" OR "student data" OR "educational data")'
+  google_scholar_queries:
+    - '"decision tree" "learning analytics"'
+    - '"decision tree" "student data"'
+    - '"decision tree" "educational data"'
+  max_records: 1000
+
+iot_smart_systems:
+  crossref_queries:
+    - '"decision tree" IoT'
+    - '"decision tree" "sensor data"'
+    - '"decision tree" "homomorphic encryption"'
+  openalex_queries:
+    - '"decision tree" AND (IoT OR "sensor data" OR "homomorphic encryption")'
+  google_scholar_queries:
+    - '"decision tree" IoT'
+    - '"decision tree" "sensor data"'
+    - '"decision tree" "homomorphic encryption"'
+  max_records: 1000
+
+government_public_admin:
+  crossref_queries:
+    - '"decision tree" "public data"'
+    - '"decision tree" government'
+  openalex_queries:
+    - '"decision tree" AND ("public data" OR government)'
+  google_scholar_queries:
+    - '"decision tree" "public data"'
+    - '"decision tree" government'
+  max_records: 1000
+
+cybersecurity_intrusion_detection:
+  crossref_queries:
+    - '"decision tree" cybersecurity'
+    - '"decision tree" "network threat"'
+    - '"decision tree" "federated learning"'
+  openalex_queries:
+    - '"decision tree" AND (cybersecurity OR "network threat" OR "federated learning")'
+  google_scholar_queries:
+    - '"decision tree" cybersecurity'
+    - '"decision tree" "network threat"'
+    - '"decision tree" "federated learning"'
+  max_records: 1000
+
+hr_recruitment:
+  crossref_queries:
+    - '"decision tree" "HR analytics"'
+    - '"decision tree" "employee data"'
+  openalex_queries:
+    - '"decision tree" AND ("HR analytics" OR "employee data")'
+  google_scholar_queries:
+    - '"decision tree" "HR analytics"'
+    - '"decision tree" "employee data"'
+  max_records: 1000
+
+transportation_logistics:
+  crossref_queries:
+    - '"decision tree" "routing optimization"'
+    - '"decision tree" transportation'
+    - '"decision tree" logistics'
+  openalex_queries:
+    - '"decision tree" AND ("routing optimization" OR transportation OR logistics)'
+  google_scholar_queries:
+    - '"decision tree" "routing optimization"'
+    - '"decision tree" transportation'
+    - '"decision tree" logistics'
+  max_records: 1000
