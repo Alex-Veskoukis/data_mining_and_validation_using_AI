@@ -1,0 +1,19 @@
+pandas==2.2.2
+requests==2.32.4
+scholarly==1.7.11            # Google‑Scholar scraper
+keybert==0.7.0
+sentence-transformers==2.7.0 # keyBERT dependency
+networkx==3.3
+PyYAML==6.0.1
+tqdm==4.66.4
+httpx==0.27.2
+urllib3~=2.5.0
+openai==0.28
+nltk==3.9.1
+spacy==3.7.2
+matplotlib==3.10.1
+seaborn==0.13.2
+wordcloud==1.9.4
+simplejson==3.20.1
+inflect==7.5.0
+PyPDF2==3.0.1
