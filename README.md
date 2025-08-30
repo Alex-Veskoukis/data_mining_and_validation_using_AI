@@ -5,7 +5,7 @@ This notebook serves as both a methodological record and analytical report for a
 
 ### Methodological overview
 
-1. **Data source selection:** Published scientific articles were chosen as the primary source of real‑world examples because peer‑reviewed publications often describe the use of analytics methods in practice.  A bespoke Python package was developed to mine publicly available article metadata from the Crossref and OpenAlex APIs.  Searches were constructed for twelve industries—  
+1. **Data source selection:** Published scientific articles were chosen as the primary source of real‑world examples because peer‑reviewed publications often describe the use of analytics methods in practice.  The bespoke Python package was developed to mine publicly available article metadata from the Crossref and OpenAlex APIs.  Searches were constructed for twelve industries—  
 
     *Banking Finance, Healthcare Pharma, Insurance, E‑commerce Retail, Telecom Network Security, Social Media, Education Learning Analytics, IoT Smart Systems, Government Public Administration, Cybersecurity Intrusion Detection, HR Recruitment* and *Transportation Logistics*   
    
