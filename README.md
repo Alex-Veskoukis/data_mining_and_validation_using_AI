@@ -51,3 +51,16 @@ The dataset does not contain the enactment years of the regulations. The followi
 | COPPA | 1998 | Signed into law on 21 October 1998【227641286164990†L415-L421】 |
 | FERPA | 1974 | Enacted in 1974. |
 | ECPA | 1986 | Enacted in 1986. |
+
+
+## Data
+The data mined, processed and analyzed can be found in the following links:    
+* The legal texts that have been used:    
+[data/correct/authoritative_legal_texts](https://houtest-my.sharepoint.com/:u:/g/personal/alexios_veskoukis_ac_eap_gr/ER2A2pP_cWVIkjfaZ1lIZvABybHAz7H2K3i-CqoBMV9WIg?e=GpjNTd)
+
+* The raw scientific articles that have been harvested:    
+[data/raw](https://houtest-my.sharepoint.com/:u:/g/personal/alexios_veskoukis_ac_eap_gr/EbLx71aohqRMiEWly4U5uEEBEDwppDJway76QY7h7aylmg?e=dM1XFH)
+
+* The processed data produced within each step:    
+[data/processed](https://houtest-my.sharepoint.com/:u:/g/personal/alexios_veskoukis_ac_eap_gr/Eb6wSjVIH-5FqG15uJ2QM5EBrMQ9ho7-RM2OAkdpTaDa3Q?e=HsEhiD)
+
