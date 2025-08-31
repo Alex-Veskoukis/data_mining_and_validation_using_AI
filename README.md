@@ -56,7 +56,7 @@ The dataset does not contain the enactment years of the regulations. The followi
 ## Data
 The data mined, processed and analyzed can be found in the following links:    
 * The legal texts that have been used:    
-[data/correct/authoritative_legal_texts](https://houtest-my.sharepoint.com/:u:/g/personal/alexios_veskoukis_ac_eap_gr/ER2A2pP_cWVIkjfaZ1lIZvABybHAz7H2K3i-CqoBMV9WIg?e=GpjNTd)
+[data/authoritative_legal_texts](https://houtest-my.sharepoint.com/:u:/g/personal/alexios_veskoukis_ac_eap_gr/ER2A2pP_cWVIkjfaZ1lIZvABybHAz7H2K3i-CqoBMV9WIg?e=GpjNTd)
 
 * The raw scientific articles that have been harvested:    
 [data/raw](https://houtest-my.sharepoint.com/:u:/g/personal/alexios_veskoukis_ac_eap_gr/EbLx71aohqRMiEWly4U5uEEBEDwppDJway76QY7h7aylmg?e=dM1XFH)
