@@ -27,8 +27,8 @@ import pandas as pd
 import openai
 from pathlib import Path
 from tqdm import tqdm
-from utils.io import PROC
-from utils.openai_settings import (
+from src.utils.io import PROC
+from src.utils.openai_settings import (
     configure_openai,
     OPENAI_DEPLOYMENT,
     PROMPT_PRICE_PER_1000_TOKENS,
@@ -68,8 +68,8 @@ def validate_feature_regulation(feature_name, attribute_class, notes, quoted_tex
 Your task is to determine if a specific feature mentioned in a research paper is actually regulated according to the provided regulatory text.
 
 Respond with exactly one of these regulation statuses:
-- "Regulated": The feature is clearly covered by the regulation either because the whole attribute class is mentioned to be regulated or this exact feature.
-- "Not Regulated": The feature is not mentioned to be regulated neither its whole attribute class.
+- "Regulated": The feature is clearly covered by the regulation either because the whole category (attribute class) is explicitly mentioned to be regulated or this exact feature.
+- "Not Regulated": The feature is not explicitly mentioned to be regulated neither its whole category (attribute class).
 
 Also provide a confidence level: "High", "Medium", or "Low"
 
@@ -82,12 +82,12 @@ RATIONALE: [Brief explanation of your reasoning]
 Example 1 — Regulated:
 STATUS: Regulated
 CONFIDENCE: High
-RATIONALE: 'The regulatory text explicitly refers to the collection and processing of personally identifiable information, including biometric identifiers such as fingerprints. Since the feature "fingerprint pattern" falls within the Biometric_Identifier attribute class, and this class is directly covered by the regulation, it is considered regulated.'
+RATIONALE: 'The regulatory text explicitly refers to the collection and processing of personally identifiable information, including biometric identifiers such as fingerprints. Since the feature "fingerprint pattern" falls within the category (attribute class) Biometric_Identifier, and this class is directly covered by the regulation, the feature is considered regulated.'
 
 Example 2 — Not Regulated:
 STATUS: Not Regulated
 CONFIDENCE: High
-RATIONALE: 'The regulatory text provided focuses on the confidentiality and handling of substance use disorder patient records, and does not mention any specific features related to health clinical attributes, including this specific feature "05 khz" or hearing loss screening. The Health_Clinical category is not addressed in the regulations, indicating that it is not regulated under the provided context.'
+RATIONALE: 'The regulatory text provided focuses on the confidentiality and handling of substance use disorder patient records, and does not mention explicitly any specific features related to health clinical attributes, including this specific feature "05 khz" or hearing loss screening. In addition, the Health_Clinical category (attribute class) is not explicitly mentioned to be regulated. Hence, this indicates that the feature is not regulated under the provided context.'
 """
 
     user_prompt = f"""FEATURE TO VALIDATE: {feature_name}

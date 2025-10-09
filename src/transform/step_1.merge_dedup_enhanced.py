@@ -10,6 +10,7 @@ Outputs:
   - data/processed/merged_corpus.csv
   - data/processed/merged_corpus.json
 """
+from __future__ import annotations
 
 from pathlib import Path
 import json
@@ -17,8 +18,7 @@ import re
 import math
 import pandas as pd
 import typing as t
-
-from utils.io import RAW, PROC, save_csv, save_json
+from src.utils.io import RAW, PROC, save_csv, save_json
 
 PROCESSED_DIR = Path(PROC)
 

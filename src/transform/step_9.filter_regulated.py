@@ -3,62 +3,58 @@
 Filter validated_feature_regulation.json to retain only entries with:
   regulation_status == "Regulated" AND confidence == "High"
 
-Output file is the input name with the suffix "_regulated.json".
-Example:
-  Input : validated_feature_regulation.json
-  Output: validated_feature_regulation_regulated.json
+Input  : PROCESSED_DIR / "validated_feature_regulation.json"
+Output : PROCESSED_DIR / "validated_feature_regulation_regulated.json"
 """
 from __future__ import annotations
-import argparse
+
 import json
 from pathlib import Path
+from src.utils.io import PROC
 import sys
 
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "input_path",
-        help="Path to validated_feature_regulation.json (top-level JSON array).",
-    )
-    args = parser.parse_args()
+# Expect PROC to be defined in the runtime (env or imported constant).
+try:
+    PROC  # type: ignore[name-defined]
+except NameError:
+    print("ERROR: PROC is not defined in this runtime.", file=sys.stderr)
+    sys.exit(1)
 
-    in_path = Path(args.input_path).expanduser().resolve()
-    if not in_path.exists():
-        print(f"ERROR: File not found: {in_path}", file=sys.stderr)
+PROCESSED_DIR = Path(PROC)  # type: ignore[name-defined]
+IN_FILE = PROCESSED_DIR / "validated_feature_regulation.json"
+OUT_FILE = PROCESSED_DIR / f"{IN_FILE.stem}_regulated.json"
+
+def main() -> int:
+    if not IN_FILE.exists():
+        print(f"ERROR: File not found: {IN_FILE}", file=sys.stderr)
         return 1
 
-    # Derive output path: <stem>_regulated.json
-    out_path = in_path.with_name(f"{in_path.stem}_regulated.json")
-
     try:
-        with in_path.open("r", encoding="utf-8") as f:
+        # utf-8-sig tolerates BOM if present
+        with IN_FILE.open("r", encoding="utf-8-sig") as f:
             data = json.load(f)
     except json.JSONDecodeError as e:
-        print(f"ERROR: Invalid JSON in {in_path}: {e}", file=sys.stderr)
+        print(f"ERROR: Invalid JSON in {IN_FILE}: {e}", file=sys.stderr)
         return 1
 
     if not isinstance(data, list):
         print("ERROR: Expected top-level JSON array.", file=sys.stderr)
         return 1
 
-    def norm(x):
-        return x.strip() if isinstance(x, str) else x
+    def norm_str(x):
+        return x.strip().casefold() if isinstance(x, str) else x
 
     filtered = [
         row for row in data
         if isinstance(row, dict)
-        and norm(row.get("regulation_status")) == "Regulated"
-        and norm(row.get("confidence")) == "High"
+        and norm_str(row.get("regulation_status")) == "regulated"
+        and norm_str(row.get("confidence")) == "high"
     ]
 
-    # Write pretty-printed UTF-8 JSON
-    with out_path.open("w", encoding="utf-8") as f:
+    with OUT_FILE.open("w", encoding="utf-8") as f:
         json.dump(filtered, f, ensure_ascii=False, indent=2)
 
-    print(
-        f"Retained {len(filtered)} of {len(data)} records.\n"
-        f"Wrote: {out_path}"
-    )
+    print(f"Retained {len(filtered)} of {len(data)} records.\nWrote: {OUT_FILE}")
     return 0
 
 if __name__ == "__main__":

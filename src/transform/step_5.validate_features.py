@@ -18,8 +18,8 @@ import pandas as pd
 import openai
 from tqdm import tqdm
 
-from utils.io import PROC
-from utils.openai_settings import (
+from src.utils.io import PROC
+from src.utils.openai_settings import (
     configure_openai,
     OPENAI_DEPLOYMENT,
     PROMPT_PRICE_PER_1000_TOKENS,
@@ -99,7 +99,10 @@ def main():
         title = row.get("title", "")
         abstract = row.get("abstract", "")
         features = row.get("features", "")
-
+        if features == '':
+            label="Not valid"
+            validation_results.append(label)
+            continue
         label, prompt_tokens, completion_tokens = validate_features(title, abstract, features)
         validation_results.append(label)
         total_prompt_tokens += prompt_tokens

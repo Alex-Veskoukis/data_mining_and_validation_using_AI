@@ -17,8 +17,8 @@ import pandas as pd
 import openai
 from tqdm import tqdm
 
-from utils.io import PROC
-from utils.openai_settings import (
+from src.utils.io import PROC
+from src.utils.openai_settings import (
     configure_openai,
     OPENAI_DEPLOYMENT,
     PROMPT_PRICE_PER_1000_TOKENS,

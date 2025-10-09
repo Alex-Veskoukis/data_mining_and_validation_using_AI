@@ -18,8 +18,8 @@ import openai
 import pandas as pd
 from tqdm import tqdm
 
-from utils.io import PROC
-from utils.openai_settings import (
+from src.utils.io import PROC
+from src.utils.openai_settings import (
     configure_openai,
     OPENAI_DEPLOYMENT,
     PROMPT_PRICE_PER_1000_TOKENS,
@@ -79,7 +79,7 @@ def main():
     total_completion_tokens = 0
 
     # Classify each paper
-    for _, row in tqdm(df.iterrows(), total=len(df), desc="Classifying"):
+    for i, (_, row) in enumerate(tqdm(df.iterrows(), total=len(df), desc="Classifying"), start=1):
         label, prompt_tokens, completion_tokens = classify_paper(
             row.get("title", ""),
             row.get("abstract", ""),
@@ -88,7 +88,20 @@ def main():
         results.append(label)
         total_prompt_tokens += prompt_tokens
         total_completion_tokens += completion_tokens
-        time.sleep(1)  # Avoid hitting rate limits
+
+        if i % 100 == 0:
+            interim_cost = (
+                    (total_prompt_tokens / 1000) * PROMPT_PRICE_PER_1000_TOKENS +
+                    (total_completion_tokens / 1000) * COMPLETION_PRICE_PER_1000_TOKENS
+            )
+            logger.info(
+                f"[progress] processed={i} "
+                f"prompt_tokens={total_prompt_tokens} "
+                f"completion_tokens={total_completion_tokens} "
+                f"estimated_cost=${interim_cost:.4f}"
+            )
+
+        time.sleep(1)
 
     # Add classification results to the DataFrame
     df["decision_trees_related"] = results
@@ -97,14 +110,15 @@ def main():
     df.to_json(OUTPUT_JSON, orient="records", indent=2)
     logger.info(f"[ok] wrote classified results to {OUTPUT_JSON}")
 
-    # Calculate and log the estimated cost
+    # Calculate and log the final estimated cost
     total_cost = (
-        (total_prompt_tokens / 1000) * PROMPT_PRICE_PER_1000_TOKENS +
-        (total_completion_tokens / 1000) * COMPLETION_PRICE_PER_1000_TOKENS
+            (total_prompt_tokens / 1000) * PROMPT_PRICE_PER_1000_TOKENS +
+            (total_completion_tokens / 1000) * COMPLETION_PRICE_PER_1000_TOKENS
     )
     logger.info(f"Total prompt tokens: {total_prompt_tokens}")
     logger.info(f"Total completion tokens: {total_completion_tokens}")
     logger.info(f"Estimated cost: ${total_cost:.4f}")
+
 
 if __name__ == "__main__":
     main()

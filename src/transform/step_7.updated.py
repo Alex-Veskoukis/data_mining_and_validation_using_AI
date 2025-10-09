@@ -23,15 +23,16 @@ import time
 import re
 import logging
 from pathlib import Path
-
+import openpyxl
 import pdfplumber
+
 import pandas as pd
 from tqdm.auto import tqdm
 import openai
 from openai.error import InvalidRequestError, OpenAIError
 
-from utils.io import PROC
-from utils.openai_settings import (
+from src.utils.io import PROC
+from src.utils.openai_settings import (
     configure_openai,
     OPENAI_DEPLOYMENT,
     PROMPT_PRICE_PER_1000_TOKENS,
@@ -151,19 +152,66 @@ from openai.error import (
 )
 import requests
 
+# add near imports
+import json
+import re
+
+# add this helper (new)
+def _parse_model_json(raw: str) -> dict:
+    """
+    Return a dict or raise ValueError on parse failure.
+    Handles empty strings, code fences, and extra prose.
+    """
+    if raw is None:
+        raise ValueError("empty content")
+    s = raw.strip()
+    if not s:
+        raise ValueError("empty content")
+
+    # Strip code fences if present
+    m = re.search(r"```(?:json)?\s*(.*?)```", s, re.S | re.I)
+    if m:
+        s = m.group(1).strip()
+
+    # Fast path
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        pass
+
+    # Try first balanced {...}
+    depth, start = 0, None
+    for i, ch in enumerate(s):
+        if ch == "{":
+            if depth == 0:
+                start = i
+            depth += 1
+        elif ch == "}":
+            if depth:
+                depth -= 1
+                if depth == 0 and start is not None:
+                    cand = s[start : i + 1]
+                    try:
+                        return json.loads(cand)
+                    except json.JSONDecodeError:
+                        start = None  # continue scanning
+
+    raise ValueError("no valid JSON object found")
+
+# replace your call_gpt with this version
 def call_gpt(ref: str, snippet: str,
              max_retries: int = 6,
-             base_delay: 2.0 = 2.0):
+             base_delay: float = 2.0):
     """
     Robust wrapper around one ChatCompletion call.
-    • Retries on transient OpenAI/network problems.
-    • Returns (data_dict, prompt_tokens, completion_tokens)
-      even when it finally gives up (tokens = 0,0).
+    Retries on transient OpenAI/network problems.
+    Returns (data_dict, prompt_tokens, completion_tokens).
+    Never raises on parse errors.
     """
     attempt = 0
     while attempt <= max_retries:
         try:
-            resp = openai.ChatCompletion.create(
+            kwargs = dict(
                 deployment_id=OPENAI_DEPLOYMENT,
                 messages=[
                     {"role": "system", "content": SYSTEM_PROMPT},
@@ -172,32 +220,52 @@ def call_gpt(ref: str, snippet: str,
                 temperature=TEMP,
                 max_tokens=MAXTOK,
             )
-            content = resp.choices[0].message.content.strip()
-            data = json.loads(content)
-            data["_raw"] = content   # keep for audit
-            return data, resp.usage.get("prompt_tokens", 0), resp.usage.get("completion_tokens", 0)
+            # [Unverified] Some deployments accept JSON mode.
+            # Safe to keep; ignored if unsupported.
+            try:
+                kwargs["response_format"] = {"type": "json_object"}
+            except Exception:
+                pass
+
+            resp = openai.ChatCompletion.create(**kwargs)
+            content = (resp.choices[0].message.get("content") or "").strip()
+
+            try:
+                data = _parse_model_json(content)
+            except Exception as e:
+                # Do not crash; return audit payload with error
+                logger.warning(f"[parse-fail] {ref}: {e}")
+                data = {"regulated": False, "classes": [], "rationale": "",
+                        "_raw": content, "_parse_error": str(e)}
+                return (data,
+                        int(resp.usage.get("prompt_tokens", 0) or 0),
+                        int(resp.usage.get("completion_tokens", 0) or 0))
+
+            # Normal path
+            data["_raw"] = content
+            return (data,
+                    int(resp.usage.get("prompt_tokens", 0) or 0),
+                    int(resp.usage.get("completion_tokens", 0) or 0))
 
         except InvalidRequestError as e:
-            # permanent problem (e.g. too long); skip passage
             logger.warning(f"[invalid] {ref}: {e}")
-            return {"regulated": False, "_raw": "INVALID_REQUEST"}, 0, 0
+            return {"regulated": False, "classes": [], "rationale": "", "_raw": "INVALID_REQUEST"}, 0, 0
 
         except (APIError, APIConnectionError, RateLimitError, Timeout,
                 requests.exceptions.ConnectionError, OpenAIError) as e:
             attempt += 1
             if attempt > max_retries:
                 logger.error(f"[abort] {ref}: exceeded retries ({e})")
-                return {"regulated": False, "_raw": "ERROR_RETRIES_EXCEEDED"}, 0, 0
-
+                return {"regulated": False, "classes": [], "rationale": "", "_raw": "ERROR_RETRIES_EXCEEDED"}, 0, 0
             delay = base_delay * (2 ** (attempt - 1))
-            logger.warning(f"[retry {attempt}/{max_retries}] {ref}: {e} "
-                           f"– waiting {delay:.1f}s")
+            logger.warning(f"[retry {attempt}/{max_retries}] {ref}: {e} – waiting {delay:.1f}s")
             time.sleep(delay)
 
         except Exception as e:
-            # Anything unexpected → skip but record it
+            # [Verified] keep run alive; do not raise
             logger.exception(f"[unexpected] {ref}: {e}")
-            return {"regulated": False, "_raw": "UNEXPECTED_EXCEPTION"}, 0, 0
+            return {"regulated": False, "classes": [], "rationale": "", "_raw": "UNEXPECTED_EXCEPTION"}, 0, 0
+
 
 def extract_regulation_name(pdf_path: Path) -> str:
     fname = pdf_path.name.removesuffix(".pdf")
