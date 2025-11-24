@@ -3,12 +3,15 @@
 """
 Harvest metadata from OpenAlex, reconstruct abstracts, and save as JSON and CSV.
 
+Inputs: config/queries.yaml via utils.io.load_yaml() (per-domain openalex_queries, max_records).
+Outputs: data/raw/openalex_<domain>.json and data/raw/openalex_<domain>.csv.
+
 Inputs:
   - Configuration via utils.io.load_yaml(), providing per-domain:
       • openalex_queries: list of str or {search, filter} dicts
       • max_records: int
 
-Outputs (written to CWD):
+Outputs (under data/raw/):
   - openalex_<domain>.json
   - openalex_<domain>.csv
 """

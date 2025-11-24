@@ -2,6 +2,9 @@
 """
 Harvest Crossref metadata with retry and exponential back-off, saving raw JSON and CSV.
 
+Inputs: config/queries.yaml via utils.io.load_yaml() (per-domain query/crossref_queries, max_records).
+Outputs: data/raw/crossref_<domain>.json and data/raw/crossref_<domain>.csv.
+
 Inputs:
   - configuration loaded via utils.io.load_yaml(), mapping domains to:
       • "query" (str) or "crossref_queries" (list of str)
