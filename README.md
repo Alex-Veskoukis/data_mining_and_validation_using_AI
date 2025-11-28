@@ -1,5 +1,4 @@
-# Rule Hiding by Evidence — Repository Guide
-
+# Governance by Evidence: Regulated Predictors in Decision-Tree Models
 This repository provides the full implementation, data, and prompts for the study “Rule Hiding by Evidence: Regulated Predictors in Decision-Tree Models.” The pipeline harvests decision-tree papers, extracts explicitly reported predictors, maps them to a regulated data category ontology, links them to paragraph-cited privacy laws, and applies audit-based corrections reported in the study.
 
 ## Repository layout
