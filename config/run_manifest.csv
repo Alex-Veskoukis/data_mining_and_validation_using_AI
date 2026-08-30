@@ -1,0 +1,40 @@
+domain,source,query_template,api_filter,publication_date_filter,max_records,search_date,access_date,output_file,records_retrieved,random_seed
+banking_finance,crossref,"""decision tree"" banking",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_banking_finance.json,1255,none
+banking_finance,crossref,"""decision tree"" finance",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_banking_finance.json,1255,none
+banking_finance,openalex,"""decision tree"" AND (banking OR finance)",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_banking_finance.json,1000,none
+healthcare_pharma,crossref,"""decision tree"" ""medical diagnosis""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_healthcare_pharma.json,1385,none
+healthcare_pharma,crossref,"""decision tree"" healthcare",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_healthcare_pharma.json,1385,none
+healthcare_pharma,openalex,"""decision tree"" AND (""medical diagnosis"" OR healthcare)",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_healthcare_pharma.json,1000,none
+insurance,crossref,"""decision tree"" insurance",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_insurance.json,1000,none
+insurance,openalex,"""decision tree"" AND insurance",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_insurance.json,1000,none
+ecommerce_retail,crossref,"""decision tree"" ""e-commerce""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_ecommerce_retail.json,1235,none
+ecommerce_retail,crossref,"""decision tree"" retail",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_ecommerce_retail.json,1235,none
+ecommerce_retail,openalex,"""decision tree"" AND (""e-commerce"" OR retail)",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_ecommerce_retail.json,1000,none
+telecom_network_security,crossref,"""decision tree"" telecom",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_telecom_network_security.json,1760,none
+telecom_network_security,crossref,"""decision tree"" ""network security""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_telecom_network_security.json,1760,none
+telecom_network_security,openalex,"""decision tree"" AND (telecom OR ""network security"")",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_telecom_network_security.json,1000,none
+social_media,crossref,"""decision tree"" ""social media""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_social_media.json,1560,none
+social_media,crossref,"""decision tree"" ""social media analytics""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_social_media.json,1560,none
+social_media,openalex,"""decision tree"" AND (""social media"" OR ""social media analytics"")",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_social_media.json,1000,none
+education_learning_analytics,crossref,"""decision tree"" ""learning analytics""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_education_learning_analytics.json,2011,none
+education_learning_analytics,crossref,"""decision tree"" ""student data""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_education_learning_analytics.json,2011,none
+education_learning_analytics,crossref,"""decision tree"" ""educational data""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_education_learning_analytics.json,2011,none
+education_learning_analytics,openalex,"""decision tree"" AND (""learning analytics"" OR ""student data"" OR ""educational data"")",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_education_learning_analytics.json,1000,none
+iot_smart_systems,crossref,"""decision tree"" IoT",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_iot_smart_systems.json,2184,none
+iot_smart_systems,crossref,"""decision tree"" ""sensor data""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_iot_smart_systems.json,2184,none
+iot_smart_systems,crossref,"""decision tree"" ""homomorphic encryption""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_iot_smart_systems.json,2184,none
+iot_smart_systems,openalex,"""decision tree"" AND (IoT OR ""sensor data"" OR ""homomorphic encryption"")",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_iot_smart_systems.json,1000,none
+government_public_admin,crossref,"""decision tree"" ""public data""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_government_public_admin.json,1596,none
+government_public_admin,crossref,"""decision tree"" government",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_government_public_admin.json,1596,none
+government_public_admin,openalex,"""decision tree"" AND (""public data"" OR government)",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_government_public_admin.json,1000,none
+cybersecurity_intrusion_detection,crossref,"""decision tree"" cybersecurity",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_cybersecurity_intrusion_detection.json,2140,none
+cybersecurity_intrusion_detection,crossref,"""decision tree"" ""network threat""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_cybersecurity_intrusion_detection.json,2140,none
+cybersecurity_intrusion_detection,crossref,"""decision tree"" ""federated learning""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_cybersecurity_intrusion_detection.json,2140,none
+cybersecurity_intrusion_detection,openalex,"""decision tree"" AND (cybersecurity OR ""network threat"" OR ""federated learning"")",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_cybersecurity_intrusion_detection.json,1000,none
+hr_recruitment,crossref,"""decision tree"" ""HR analytics""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_hr_recruitment.json,1677,none
+hr_recruitment,crossref,"""decision tree"" ""employee data""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_hr_recruitment.json,1677,none
+hr_recruitment,openalex,"""decision tree"" AND (""HR analytics"" OR ""employee data"")",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_hr_recruitment.json,271,none
+transportation_logistics,crossref,"""decision tree"" ""routing optimization""",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_transportation_logistics.json,1975,none
+transportation_logistics,crossref,"""decision tree"" transportation",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_transportation_logistics.json,1975,none
+transportation_logistics,crossref,"""decision tree"" logistics",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/crossref_transportation_logistics.json,1975,none
+transportation_logistics,openalex,"""decision tree"" AND (""routing optimization"" OR transportation OR logistics)",has-abstract:true,none,1000,2025-07-18,2025-07-18,data/raw/openalex_transportation_logistics.json,1000,none
